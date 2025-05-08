@@ -22,7 +22,7 @@ void inicializarTabuleiro() {
 }
 void exibirTabuleiro() {
     limparTela();
-    printf("\n      1   2   3\n\n");
+    printf("\n  1   2   3\n\n");
     for (int i = 0; i < TAM; i++) {
         printf(" %d    %c | %c | %c \n", i + 1, tabuleiro[i][0], tabuleiro[i][1], tabuleiro[i][2]);
         if (i < TAM - 1)
