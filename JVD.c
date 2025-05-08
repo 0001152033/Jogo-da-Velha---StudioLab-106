@@ -5,15 +5,12 @@
 char tabuleiro[TAM][TAM];
 char player = 'X';
 void limparTela() {
-#ifdef _WIN32
     system("cls");
-#else
-    system("clear");
-#endif
 }
 void pausar() {
     printf("Pressione Enter para continuar...");
-    while (getchar() != '\n'); 
+    fflush(stdin); 
+    getchar();
 }
 void inicializarTabuleiro() {
     for (int i = 0; i < TAM; i++)
@@ -22,7 +19,7 @@ void inicializarTabuleiro() {
 }
 void exibirTabuleiro() {
     limparTela();
-    printf("\n  1   2   3\n\n");
+    printf("\n      1   2   3\n\n");
     for (int i = 0; i < TAM; i++) {
         printf(" %d    %c | %c | %c \n", i + 1, tabuleiro[i][0], tabuleiro[i][1], tabuleiro[i][2]);
         if (i < TAM - 1)
@@ -63,7 +60,8 @@ void jogarTurno() {
         exibirTabuleiro();
         printf("Jogador %c, escolha uma posicao (1-9): ", player);
         escolha = getchar();
-        while (getchar() != '\n'); 
+        fflush(stdin); 
+
         if (escolha < '1' || escolha > '9') {
             printf("Entrada invalida! Digite um numero de 1 a 9.\n");
             pausar();
@@ -101,8 +99,10 @@ void jogar() {
     printf("\nFim de jogo!\n");
     pausar();
 }
+
 int main() {
     int opcao;
+
     do {
         limparTela();
         printf("=== MENU PRINCIPAL ===\n");
@@ -112,12 +112,12 @@ int main() {
         printf("Escolha uma opcao: ");
 
         if (scanf("%d", &opcao) != 1) {
-            while (getchar() != '\n');
+            fflush(stdin);
             printf("Entrada invalida! Use apenas numeros.\n");
             pausar();
             continue;
         }
-        while (getchar() != '\n');
+        fflush(stdin);
         switch (opcao) {
             case 1:
                 jogar();
@@ -133,5 +133,6 @@ int main() {
                 pausar();
         }
     } while (opcao != 3);
+
     return 0;
 }
